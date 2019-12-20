@@ -12187,11 +12187,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Shyam WorkSpace\\Projects\\SwaggerWebAPI\\SwaggerWebAPI.csproj",
+      "projectUniqueName": "D:\\Shyam WorkSpace\\SwaggerWebAPI\\SwaggerWebAPI.csproj",
       "projectName": "SwaggerWebAPI",
-      "projectPath": "D:\\Shyam WorkSpace\\Projects\\SwaggerWebAPI\\SwaggerWebAPI.csproj",
+      "projectPath": "D:\\Shyam WorkSpace\\SwaggerWebAPI\\SwaggerWebAPI.csproj",
       "packagesPath": "C:\\Users\\arunkumar\\.nuget\\packages\\",
-      "outputPath": "D:\\Shyam WorkSpace\\Projects\\SwaggerWebAPI\\obj\\",
+      "outputPath": "D:\\Shyam WorkSpace\\SwaggerWebAPI\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
