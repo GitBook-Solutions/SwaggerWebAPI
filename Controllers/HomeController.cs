@@ -10,7 +10,7 @@ namespace SwaggerWebAPI.Controllers
     [ApiController]
     public class HomeController: ControllerBase
     {
-        private IEmployeeRepository _employeeRepository;
+        private IEmployeeRepository _employeeRepository {get;}
         public HomeController(IEmployeeRepository employeeRepository)
         {
             _employeeRepository=employeeRepository;

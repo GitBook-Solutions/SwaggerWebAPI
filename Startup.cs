@@ -27,7 +27,8 @@ namespace SwaggerWebAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-            services.AddSingleton<IEmployeeRepository, EmployeeRepository>();
+            //services.AddSingleton<IEmployeeRepository, EmployeeRepository>();
+            services.IOCRegisterServices();
             services.AddSwaggerGen(c =>
             {
             c.SwaggerDoc("v2", new Info { Title = "My API", Version = "v2" });
