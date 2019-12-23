@@ -15,11 +15,17 @@ namespace SwaggerWebAPI
 {
     public static class IOCConfiguration
     {
+        //This Extension Method of IServiceCollection type
         public static IServiceCollection IOCRegisterServices(this IServiceCollection services)
         {
             services.AddSingleton<IEmployeeRepository, EmployeeRepository>();
             // and a lot more Services
             return services;
         }
+        // public static void IOCRegisterServices(IServiceCollection services)
+        // {
+        //     services.AddSingleton<IEmployeeRepository, EmployeeRepository>();
+        //     // and a lot more Services
+        // }
     }
 }
