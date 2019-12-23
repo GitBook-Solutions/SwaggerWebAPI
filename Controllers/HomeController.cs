@@ -23,10 +23,10 @@ namespace SwaggerWebAPI.Controllers
         }
          // GET api/values/5
         [HttpGet("{id}")]
-        public ActionResult<string> GetById(int id)
+        public ActionResult<Employee> GetById(int id)
         {
-           string name =_employeeRepository.GetEmployee(id).Name;
-            return $"{name}";
+           Employee EmpDetails =_employeeRepository.GetEmployee(id);
+           return EmpDetails;
         }
     }
 }
