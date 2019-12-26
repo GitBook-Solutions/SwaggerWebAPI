@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -10,6 +12,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
 using Swashbuckle.AspNetCore.Swagger;
 using SwaggerWebAPI.Models;
 namespace SwaggerWebAPI
@@ -30,9 +33,34 @@ namespace SwaggerWebAPI
             //services.AddSingleton<IEmployeeRepository, EmployeeRepository>();
             services.IOCRegisterServices();
             //IOCConfiguration.IOCRegisterServices(services);
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                    .AddJwtBearer(options =>
+                    {
+                        var serverSecret = new SymmetricSecurityKey(Encoding.UTF8.
+                    GetBytes(Configuration["JWT:key"]));
+                        options.TokenValidationParameters = new
+                        TokenValidationParameters
+                        {
+                            IssuerSigningKey = serverSecret,
+                            ValidIssuer = Configuration["JWT:Issuer"],
+                            ValidAudience = Configuration["JWT:Audience"]
+                        };
+                    });
             services.AddSwaggerGen(c =>
             {
             c.SwaggerDoc("v2", new Info { Title = "My API", Version = "v2" });
+            c.AddSecurityDefinition("Bearer", new ApiKeyScheme
+                {
+                    In = "header",
+                    Description = "Please insert JWT with Bearer into field",
+                    Name = "Authorization",
+                    Type = "apiKey"
+                });
+
+            c.AddSecurityRequirement(new Dictionary<string, IEnumerable<string>>
+                {
+                    { "Bearer", new string[] { } }
+                });
             });
         }
 
@@ -48,7 +76,7 @@ namespace SwaggerWebAPI
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
-
+            app.UseAuthentication();
             app.UseHttpsRedirection();
             app.UseMvc();
             app.UseSwagger();
